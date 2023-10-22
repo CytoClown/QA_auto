@@ -12,3 +12,8 @@ def driver():
     driver.quit()
 
 # service=ChromeService(ChromeDriverManager().install())
+# --start-maximized
+# chrome_options.add_argument('--window-size=1500, 900')
+# options = ChromeOptions()
+# options.add_argument("--start-maximized")
+# driver = ChromeDriver(options)
