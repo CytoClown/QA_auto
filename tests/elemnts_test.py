@@ -111,5 +111,13 @@ class TestElements:
             assert right == 'You have done a right click', 'Right click button was not pressed'
             assert click == 'You have done a dynamic click', 'Dynamic click button was not pressed'
 
-
+        def test_buttons_click(self, driver):
+            button_page = ButtonsPage(driver, 'https://demoqa.com/buttons')
+            button_page.open()
+            double = button_page.double_click_on_button()
+            right = button_page.right_click_on_button()
+            click = button_page.click_on_button()
+            assert double == 'You have done a double click', 'Double click button was not pressed'
+            assert right == 'You have done a right click', 'Right click button was not pressed'
+            assert click == 'You have done a dynamic click', 'Dynamic click button was not pressed'
 
