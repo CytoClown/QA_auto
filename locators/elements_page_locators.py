@@ -63,6 +63,14 @@ class ButtonsPageLocators:
     SUCCESS_RIGHT = (By.CSS_SELECTOR, 'p[id="rightClickMessage"]')
     SUCCESS_CLICK_ME = (By.CSS_SELECTOR, 'p[id="dynamicClickMessage"]')
 
+class LinkPageLocators:
+    SIMPLE_LINK = (By.CSS_SELECTOR, '#simpleLink')
+    BAD_REQUEST = (By.CSS_SELECTOR, '#bad-request')
+    CREATED_LINK = (By.CSS_SELECTOR, '#created')
+    NO_CONTENT_LINK = (By.CSS_SELECTOR, '#no-content')
+    NOT_FOUND_LINK = (By.CSS_SELECTOR, '#invalid-url')
+
+
 
 
 

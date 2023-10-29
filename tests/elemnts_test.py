@@ -2,7 +2,7 @@ import random
 import time
 
 from conftest import driver
-from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage
+from pages.elements_page import TextBoxPage, CheckBoxPage, RadioButtonPage, WebTablePage, ButtonsPage, LinksPage
 
 
 class TestElements:
@@ -121,3 +121,41 @@ class TestElements:
             assert right == 'You have done a right click', 'Right click button was not pressed'
             assert click == 'You have done a dynamic click', 'Dynamic click button was not pressed'
 
+    class TestLinksPage:
+
+        def test_check_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            href_link, current_url = links_page.check_new_tab_simple_link()
+            assert href_link == current_url, 'Invalid response code, this link is incorrect'
+
+        def test_link_raise_for_status(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            href_link, current_url = links_page.check_simple_link()
+            assert href_link == current_url, 'Invalid response code, this link is incorrect'
+
+        def test_broken_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_broken_link('https://demoqa.com/bad-request')
+            assert response_code == 400, 'Invalid response code'
+
+        def test_created_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_created_status_code('https://demoqa.com/created')
+            assert response_code == 201, 'Invalid response code'
+
+        def test_no_content_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_no_content_status_code('https://demoqa.com/no-content')
+            assert response_code == 204, 'Invalid response code'
+
+        def test_not_found_link(self, driver):
+            links_page = LinksPage(driver, 'https://demoqa.com/links')
+            links_page.open()
+            response_code = links_page.check_not_found_status_code('https://demoqa.com/invalid-url')
+            time.sleep(2)
+            assert response_code == 404, 'Invalid response code'

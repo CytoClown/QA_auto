@@ -1,11 +1,12 @@
 import random
 import time
 
+import requests
 from selenium.webdriver.common.by import By
 
 from generator.generator import generated_person
 from locators.elements_page_locators import TextBoxPageLocators, CheckBoxPageLocators, RadioButtonPageLocators, \
-    WebTablePageLocators, ButtonsPageLocators
+    WebTablePageLocators, ButtonsPageLocators, LinkPageLocators
 from pages.basepage import BasePage
 
 class TextBoxPage(BasePage):
@@ -199,3 +200,65 @@ class ButtonsPage(BasePage):
         self.element_is_visible(self.locators.CLICK_ME_BUTTON).click()
         return self.element_is_present(self.locators.SUCCESS_CLICK_ME).text
 
+class LinksPage(BasePage):
+    locators = LinkPageLocators()
+
+    def check_new_tab_simple_link(self):
+        simple_link = self.element_is_visible(self.locators.SIMPLE_LINK)
+        link_href = simple_link.get_attribute('href')
+        request = requests.get(f'{link_href}')
+        if request.status_code == 200:
+            simple_link.click()
+            self.driver.switch_to.window(self.driver.window_handles[1])
+            url = self.driver.current_url
+            return link_href, url
+        else:
+            return link_href, request.status_code
+
+    def check_simple_link(self):
+        simple_link = self.element_is_visible(self.locators.SIMPLE_LINK)
+        link_href = simple_link.get_attribute('href')
+        try:
+            with requests.get(link_href) as response:
+                response.raise_for_status()
+                simple_link.click()
+                self.driver.switch_to.window(self.driver.window_handles[1])
+                url = self.driver.current_url
+                return link_href, url
+        except requests.exceptions.RequestException:
+            return link_href, response.status_code
+
+    def check_broken_link(self, url):
+        request = requests.get(url)
+        if request.status_code == 200:
+            self.element_is_present(self.locators.BAD_REQUEST).click()
+        else:
+            return request.status_code
+
+    def check_created_status_code(self, url):
+        try:
+            with requests.get(url) as response:
+                response.raise_for_status()
+                self.element_is_present(self.locators.CREATED_LINK).click()
+                return response.status_code
+        except requests.exceptions.RequestException:
+            return response.status_code
+
+
+    def check_no_content_status_code(self, url):
+        try:
+            with requests.get(url) as response:
+                response.raise_for_status()
+                self.element_is_present(self.locators.NO_CONTENT_LINK).click()
+                return response.status_code
+        except requests.exceptions.RequestException:
+            return response.status_code
+
+    def check_not_found_status_code(self, url):
+        try:
+            with requests.get(url) as response:
+                response.raise_for_status()
+                self.element_is_present(self.locators.NO_CONTENT_LINK).click()
+                return response.status_code
+        except requests.exceptions.RequestException:
+            return response.status_code
