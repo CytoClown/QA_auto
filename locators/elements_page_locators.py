@@ -75,6 +75,12 @@ class UploadDownloadPageLocators:
 
     DOWNLOAD_FILE = (By.CSS_SELECTOR, '#downloadButton')
 
+class DynamicPropertiesPageLocators:
+    COLOR_CHANGE_BUTTON = (By.CSS_SELECTOR, 'button[id="colorChange"]')
+    VISIBLE_AFTER_5_SECOND_BUTTON = (By.CSS_SELECTOR, 'button[id="visibleAfter"]')
+    CLICKABLE_AFTER_5_SECOND_BUTTON = (By.CSS_SELECTOR, 'button[id="enableAfter"]')
+
+
 
 
 
