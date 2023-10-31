@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 class TextBoxPageLocators:
 
     # form fields
-
     FULL_NAME = (By.CSS_SELECTOR, 'input[id = "userName"]')
     EMAIL = (By.CSS_SELECTOR, 'input[id="userEmail"]')
     CURRENT_ADDRESS = (By.CSS_SELECTOR, 'textarea[id="currentAddress"]')
@@ -69,6 +68,12 @@ class LinkPageLocators:
     CREATED_LINK = (By.CSS_SELECTOR, '#created')
     NO_CONTENT_LINK = (By.CSS_SELECTOR, '#no-content')
     NOT_FOUND_LINK = (By.CSS_SELECTOR, '#invalid-url')
+
+class UploadDownloadPageLocators:
+    UPLOAD_FILE = (By.CSS_SELECTOR, 'input[id="uploadFile"]')
+    UPLOADED_FILE = (By.CSS_SELECTOR, '#uploadedFilePath')
+
+    DOWNLOAD_FILE = (By.CSS_SELECTOR, '#downloadButton')
 
 
 

@@ -18,3 +18,10 @@ def generated_person():
         current_address=faker_ru.address(),
         permanent_address=faker_ru.address()
     )
+
+def generated_file():
+    path = rf'C:\QA\QA_auto\filetest{random.randint(0, 999)}.txt'
+    file = open(path, 'w+')
+    file.write(f'Hello world {random.randint(0, 999)}')
+    file.close()
+    return file.name, path
