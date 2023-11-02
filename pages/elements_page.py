@@ -275,7 +275,6 @@ class UploadDownloadPage(BasePage):
         self.element_is_present(self.locators.UPLOAD_FILE).send_keys(path)
         os.remove(path)
         text = self.element_is_present(self.locators.UPLOADED_FILE).text
-        # return text, file_name
         return file_name.split('\\')[-1], text.split('\\')[-1]
 
     def download_file(self):

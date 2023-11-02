@@ -16,7 +16,8 @@ def generated_person():
         salary=random.randint(10000, 100000),
         email=faker_ru.email(),
         current_address=faker_ru.address(),
-        permanent_address=faker_ru.address()
+        permanent_address=faker_ru.address(),
+        phone_number=random.randint(1000000000, 9999999999)
     )
 
 def generated_file():
@@ -25,3 +26,7 @@ def generated_file():
     file.write(f'Hello world {random.randint(0, 999)}')
     file.close()
     return file.name, path
+
+def generated_subject():
+    subject = ['Maths', 'Hindi', 'Biology', 'Chemistry', 'Arts', 'Accounting', 'Computer Science', 'Social Studies']
+    return subject[random.randint(0, len(subject)-1)]
