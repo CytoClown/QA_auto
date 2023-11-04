@@ -1,4 +1,5 @@
 import random
+import string
 
 from data.data import Person
 from faker import Faker
@@ -30,3 +31,9 @@ def generated_file():
 def generated_subject():
     subject = ['Maths', 'Hindi', 'Biology', 'Chemistry', 'Arts', 'Accounting', 'Computer Science', 'Social Studies']
     return subject[random.randint(0, len(subject)-1)]
+
+def generated_text():
+    length = random.randint(0, 30)
+    letters = string.ascii_lowercase
+    rand_string = ''.join(random.choice(letters) for i in range(length))
+    return rand_string
